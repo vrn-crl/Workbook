@@ -6,8 +6,16 @@ public class StringTest {
         System.out.println(args[0] + " "+ args[1] + " " + args[2]);
 
         //verifica che gli elementi sono 3
+
         int arrayLength=args.length;
         System.out.println(arrayLength);
+
+        if (arrayLength==3) {
+            System.out.println("no problem");
+        }
+        else {
+            System.out.println("Inserisci 3 args!");
+        }
 
         //calcola la lunghezza di ciascuna stringa
         int string_1 = args[0].length();
