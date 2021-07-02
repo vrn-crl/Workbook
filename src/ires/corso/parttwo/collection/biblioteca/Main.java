@@ -23,7 +23,7 @@ public class Main {
     //    Tutte le classi possono essere pensate come semplici strutture dati: quindi campi private e final,
     //    valori dei campi da passare nel costruttore, solo metodi "getter" per recupare i valori.
 
-    //Creazione 8 libri e 5 categorie
+    //-------------8 LIBRI---------------------------------------
     public static void main(String[] args) {
         Libro l1 = new Libro("Il Signore degli Anelli", "J.R.R Tolkien", "1920", 1000, 3, 100);
         Libro l2 = new Libro("Madame Bouvary","Flaubert", "1920", 1000, 3, 100);
@@ -34,69 +34,31 @@ public class Main {
         Libro l7 = new Libro("Java Programming for Dummies","Marcello Mauro", "1920", 1000, 3, 100);
         Libro l8  = new Libro("Anna Karenina","Tolstoj", "1920", 1000, 3, 100);
 
-        Categoria fantasy = new Categoria("Fantasy", "...");
+    //--------------CATEGORIE-------------------------------------
+        Categoria fantasy = new Categoria("Fantasy", "libri fantasy");
         Categoria drammatico = new Categoria("Drammatico", "...");
         Categoria classico = new Categoria("Classico", "...");
         Categoria informatica = new Categoria("Informatica", "...");
-        Categoria attualità = new Categoria("Attualità", "...");
+        Categoria attualita = new Categoria("Attualità", "...");
         Categoria giallo = new Categoria("Giallo", "...");
         Categoria horror = new Categoria("Horror", "...");
-
-        //Il signore degli anelli --> Fantasy l1
-        //Madame Bouvary--> Classico, Drammatico l2
-        //Null pointer exeption --> Horror, Informatica l3
-        //Il maestro e margherita --> Classico l4
-        //Marcovaldo --> Classico l5
-        // Per Mano nel buio --> Attualità, Drammatico l6
-        //Java Programming for Dummies --> Informatica l7
-        //Anna Karenina --> Classico, Drammatico l8
 
         //--------------------------------------------------------------------------------------------------------------
 
         /*Almeno 4 libri devono essere associati a più di una categoria.
             Rappresentate opportunamente l'associazione tra libri e categorie in una struttura (basata sulle Java
             collections) che permetta di ricavare agevolmente a quali categorie appartiene un libro.*/
+        l1.aggiungiCategoria(fantasy);
+        l2.aggiungiCategoria(drammatico);
+        l2.aggiungiCategoria(classico);
+        l6.aggiungiCategoria(attualita); //aggiunge la categoria del libro nell ArrayList "categorieLibri" e il libro e la categoria nell'hashMap "relazLibroCat"
 
-        ArrayList<String> libriDrammatici = new ArrayList<>();
-        libriDrammatici.add(l2.getTitolo());
-        libriDrammatici.add(l6.getTitolo());
-        libriDrammatici.add(l8.getTitolo());
 
-        ArrayList<String> libriClassici = new ArrayList<>();
-        libriClassici.add(l2.getTitolo());
-        libriClassici.add(l4.getTitolo());
-        libriClassici.add(l5.getTitolo());
-        libriClassici.add(l8.getTitolo());
-
-        ArrayList<String> libriFantasy = new ArrayList<>();
-        libriFantasy.add(l1.getTitolo());
-
-        ArrayList<String> libriAttualità = new ArrayList<>();
-        libriAttualità.add(l6.getTitolo());
-
-        ArrayList<String> libriInformatica = new ArrayList<>();
-        libriInformatica.add(l3.getTitolo());
-        libriInformatica.add(l7.getTitolo());
-
-        ArrayList<String> libriHorror = new ArrayList<>();
-        libriHorror.add(l3.getTitolo());
-
-        Map <Categoria, ArrayList> libroCategoria = new HashMap<>();
-        libroCategoria.put(fantasy, libriFantasy);
-        libroCategoria.put(horror,libriHorror);
-        libroCategoria.put(informatica, libriInformatica);
-        libroCategoria.put(classico, libriClassici);
-        libroCategoria.put(drammatico, libriDrammatici);
-        libroCategoria.put(attualità, libriAttualità);
-
-        Iterator<Map.Entry<Categoria, ArrayList>> itr = libroCategoria.entrySet().iterator();
-        System.out.println(libriAttualità.toString());
-        while(itr.hasNext())
-        {
-            Map.Entry<Categoria, ArrayList> entry = itr.next();
-            System.out.println("Genere = " + entry.getKey().getTitolo() +
-                    ", Libri = " + entry.getValue());
+        ArrayList<String> elencoGeneriPerLibro = new ArrayList<>();
+        for(Categoria c: l2.categorieLibri) {
+            elencoGeneriPerLibro.add(c.getTitolo());
         }
+        System.out.println(l2.getTitolo() + elencoGeneriPerLibro.toString());
     }
 }
 
