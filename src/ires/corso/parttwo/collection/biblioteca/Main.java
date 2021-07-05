@@ -1,10 +1,7 @@
 package ires.corso.parttwo.collection.biblioteca;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
+import java.util.*;
+import java.lang.*;
 public class Main {
     //    Create almeno 8 libri diversi e 5 categorie diverse.
     //    Almeno 4 libri devono essere associati a più di una categoria.
@@ -48,17 +45,61 @@ public class Main {
         /*Almeno 4 libri devono essere associati a più di una categoria.
             Rappresentate opportunamente l'associazione tra libri e categorie in una struttura (basata sulle Java
             collections) che permetta di ricavare agevolmente a quali categorie appartiene un libro.*/
+
+        //sto aggiungendo una categoria specifica all'arrayList CategorieLibri dell istanza l1, l2, l6
         l1.aggiungiCategoria(fantasy);
         l2.aggiungiCategoria(drammatico);
         l2.aggiungiCategoria(classico);
         l6.aggiungiCategoria(attualita); //aggiunge la categoria del libro nell ArrayList "categorieLibri" e il libro e la categoria nell'hashMap "relazLibroCat"
 
+        //--------ELENCO LIBRI con categoria assegnata(NON TUTTI)
+        List<Libro> elencoLibri= new ArrayList<>();
+        elencoLibri.add(l1);
+        elencoLibri.add(l2);
+        elencoLibri.add(l6);
+//-------STAMPA LIBRO E GENERE/I ASSOCIATO/I
 
-        ArrayList<String> elencoGeneriPerLibro = new ArrayList<>();
-        for(Categoria c: l2.categorieLibri) {
-            elencoGeneriPerLibro.add(c.getTitolo());
+        for (Libro l : elencoLibri) {
+            List<String> elencoGeneriPerLibro = new ArrayList<>();
+            for (Categoria c : l.categorieLibri) {
+                elencoGeneriPerLibro.add(c.getTitolo());
+            }
+            System.out.println(l.getTitolo() + " è associato al/ai seguente/i genere/i: " + elencoGeneriPerLibro.toString());
+
         }
-        System.out.println(l2.getTitolo() + elencoGeneriPerLibro.toString());
+
+        //lista libri in prestito Veronica
+        ArrayList <Libro> libriU1 = new ArrayList<>();
+        libriU1.add(l1);
+        libriU1.add(l2);
+        libriU1.add(l3);
+        //lista libri in prestito di Davide
+        ArrayList <Libro> libriU2 = new ArrayList<>();
+        libriU2.add(l4);
+        libriU2.add(l5);
+
+
+
+        //
+        //CREIAMO DUE UTENTI
+        Utente u1 = new Utente("Veronica","Cirillo",353);
+        Utente u2 = new Utente("Davide", "Revignas", 543);
+
+
+        //Prestito prestitoU1 = new Prestito(libriU1); //l'utente Veronica Ha preso 3 libri in prestito
+        Prestito prestitoU2 = new Prestito(libriU2); //
+
+        //System.out.println(prestitoU1.ottieniLibriPrestati().size());
+        System.out.println(prestitoU2.ottieniLibriPrestati().size());
+
+        u1.aggiungiPrestito(new Prestito(libriU1));
+        u2.aggiungiPrestito(prestitoU2);
+
+        for(Prestito p: Utente.getLoanById(353)) {
+            for(Libro l: p.listaLibriPrestati) {
+                System.out.println("Libri presi in prestito: " + l.getTitolo());
+            }
+        }
     }
 }
 

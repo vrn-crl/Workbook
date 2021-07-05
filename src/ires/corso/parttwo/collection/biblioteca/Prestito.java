@@ -1,10 +1,16 @@
 package ires.corso.parttwo.collection.biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Prestito {
-    private final Utente u;
-    int numPrestito;
-    public Prestito(Utente u,int numPrestito){
-        this.u = u;
-        this.numPrestito = numPrestito;
+    public List<Libro> listaLibriPrestati;
+
+    public Prestito(List<Libro> listaLibriPrestati){
+        this.listaLibriPrestati = listaLibriPrestati;
+    }
+
+    public List<Libro> ottieniLibriPrestati() {
+        return listaLibriPrestati;
     }
 }
