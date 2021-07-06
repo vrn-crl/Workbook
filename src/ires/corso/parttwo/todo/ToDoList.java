@@ -1,12 +1,10 @@
 package ires.corso.parttwo.todo;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
+import java.io.IOException;
+import java.util.*;
 
 // GRUPPO 1:
-public class ToDoList
-{
+public class ToDoList {
     // Implementa le funzionalità di visualizzazione con:
     // - ordinamento per priorità
     // - ordinamento per data
@@ -14,14 +12,31 @@ public class ToDoList
     // Si appoggia a un metodo di ToDoRepository per avere una lista (= copia dei TO-DO
     // originali) dei TO-DO attualmente a sistema, cioè un ArrayList facilmente utilizzabile
 
-    ToDoRepository tdr = ToDoRepository.getToDoRepository();//ci ritorna quella repository (oggetto statico, smepre quello)
-    ArrayList<ToDo> tDList = tdr.getToDoList();
+    private ToDoRepository tdr = ToDoRepository.getToDoRepository();//ci ritorna quella repository (oggetto statico, smepre quello)
+    private ArrayList<ToDo> tDList = tdr.getToDoList();
+
+    Comparator<ToDo> compareByPriority = (t1, t2) -> t1.getPriority().compareTo(t2.getPriority());
+
+    public ToDoList() throws IOException {
+    }
 
     public void viewByPriority() {
-        // Questa funzione è chiamata qunado l'utente sceglie di visualizzare i dati per priorità...
-
-    public void viewByDate(){
-        tDList.sort(Comparator<>);
-        }
+        Collections.sort(tDList, compareByPriority);
+        tDList.forEach(t -> System.out.println(t.prettyPrint()));
     }
+
+    Comparator<ToDo> compareByStatus = (ToDo t1, ToDo t2) -> t1.getStatus().compareTo(t2.getStatus());
+
+    public void viewByStatus() {
+        Collections.sort(tDList, compareByPriority);
+        tDList.forEach(t -> System.out.println(t.prettyPrint()));
+    }
+
+    Comparator<ToDo> compareByDate = (ToDo t1, ToDo t2) -> t1.getDeliveryDate().compareTo(t2.getDeliveryDate());
+
+    public void viewByDate() {
+        Collections.sort(tDList, compareByDate);
+        tDList.forEach(t -> System.out.println(t.prettyPrint()));
+    }
+
 }
